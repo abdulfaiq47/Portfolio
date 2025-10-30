@@ -12,8 +12,21 @@
 
 html,
 body {
-  max-width: 100vw;
+  max-width: 100%;
   overflow-x: hidden;
+  --bg-custom: radial-gradient(
+      1200px 600px at 10% 10%,
+      rgba(107, 220, 255, 0.175),
+      transparent 8%
+    ),
+    radial-gradient(
+      800px 400px at 90% 85%,
+      rgba(155, 107, 255, 0.1590909090909091),
+      transparent 8%
+    ),
+    #05040a;
+    background: var(--bg-custom);
+
 }
 
 body {
