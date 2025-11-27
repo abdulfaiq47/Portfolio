@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import LiquidLight from "@/components/Hover/page";
+import LiquidLight from "@Hover";
 import styles from "./page.module.css";
 import GradualBlur from "@/components/BottBlur/page";
 import SciFiDashboard from "@/Background";
