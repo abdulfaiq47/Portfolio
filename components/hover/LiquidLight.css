@@ -27,13 +27,11 @@
   );
   transition: background 0.1s ease-out;
   mix-blend-mode: multiply;
-  height: 110vh;
+  height: 688px;
 }
 
-
 @media (max-width: 480px) {
-  .liquid-mask{
+  .liquid-mask {
     height: 150vh;
   }
-  
 }

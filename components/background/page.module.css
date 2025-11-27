@@ -625,7 +625,7 @@
 /* Extra small (≤480px) — narrow phones */
 @media (max-width: 480px) {
   .canvas {
-  
+    overflow-x: hidden;
     padding: 12px;
     gap: 14px;
   }
