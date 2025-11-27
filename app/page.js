@@ -15,6 +15,7 @@ import { ReactTyped } from "react-typed";
 export default function Home() {
   return (
     <>
+    {/*  */}
       <Navbar />
       <section id="main" className={styles.Main}>
         <div className={styles.HomeAB}>
