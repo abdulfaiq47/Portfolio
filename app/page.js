@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import styles from "./page.module.css";
-import SciFiDashboard from "@/components/Background/page";
 import LiquidLight from "@/components/Hover/page";
+import styles from "./page.module.css";
 import GradualBlur from "@/components/BottBlur/page";
+import SciFiDashboard from "@/components/Background/page";
 import Navbar from "@/components/Navbar/page";
 import Card from "@/components/Scrol/page";
 import Skills from "@/components/Skill/page";
