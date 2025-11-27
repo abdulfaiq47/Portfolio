@@ -11,11 +11,10 @@ import { ContactF } from "@/components/Contact/page";
 import ScrollReveal from "@/components/ScrolRevel/page";
 import { ReactTyped } from "react-typed";
 
-
 export default function Home() {
   return (
     <>
-    {/*  */}
+      {/*  */}
       <Navbar />
       <section id="main" className={styles.Main}>
         <div className={styles.HomeAB}>
@@ -25,7 +24,7 @@ export default function Home() {
                 <h2>
                   Hi,
                   <br />
-                  I'm <span className={styles.AbFaiq}>Abdul Faiq</span>
+                  I&apos;m <span className={styles.AbFaiq}>Abdul Faiq</span>
                 </h2>
 
                 <ReactTyped
@@ -65,9 +64,7 @@ export default function Home() {
         </div>
       </section>
       <hr className={styles.liquidhr} />
-      <section id="about" className={styles.About}>
-      
-      </section>
+      <section id="about" className={styles.About}></section>
       <hr className={styles.liquidhr} />
       <section id="skill" className={styles.Skill}>
         <ScrollReveal>
