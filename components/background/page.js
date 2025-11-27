@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import styles from "./page.module.css";
 
 const clamp = (n, min, max) => {
@@ -34,8 +34,6 @@ export default function SciFiDashboard() {
     'console.log("%c[Beam Ready] →", "color:#6bdcff;", beam.status);',
   ]);
 
-  
-
   // refs
   const beamCoreRef = useRef(null);
   const beamVisualRef = useRef(null);
@@ -45,38 +43,58 @@ export default function SciFiDashboard() {
 
   // render events helper (escape)
   const escapeHtml = (s) =>
-    String(s).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+    String(s).replace(
+      /[&<>"']/g,
+      (m) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        }[m])
+    );
 
   // apply visuals (mirrors original apply())
-  const apply = () => {
+
+  const apply = useCallback(() => {
     // background stars amount -> change root CSS background gradients
     document.documentElement.style.setProperty(
       "--bg-custom",
-      `radial-gradient(1200px 600px at 10% 10%, rgba(107,220,255,${clamp(bg / 200, 0, 1)}), transparent 8%), radial-gradient(800px 400px at 90% 85%, rgba(155,107,255,${clamp(
+      `radial-gradient(1200px 600px at 10% 10%, rgba(107,220,255,${clamp(
+        bg / 200,
+        0,
+        1
+      )}), transparent 8%), radial-gradient(800px 400px at 90% 85%, rgba(155,107,255,${clamp(
         bg / 220,
         0,
-        1,
-      )}), transparent 8%), #05040a`,
+        1
+      )}), transparent 8%), #05040a`
     );
 
     // amount -> scale
     const scale = 0.6 + amount / 200;
-    if (beamCoreRef.current) beamCoreRef.current.style.setProperty("--beam-scale", String(scale));
+    if (beamCoreRef.current)
+      beamCoreRef.current.style.setProperty("--beam-scale", String(scale));
 
     // opacity -> beamCore opacity
-    if (beamCoreRef.current) beamCoreRef.current.style.opacity = String(clamp(opacity / 100, 0, 1));
+    if (beamCoreRef.current)
+      beamCoreRef.current.style.opacity = String(clamp(opacity / 100, 0, 1));
 
     // intensity -> beam glow strength
     const intensityVal = clamp(intensity / 100, 0, 2);
-    document.documentElement.style.setProperty("--beam-intensity", String(intensityVal));
+    document.documentElement.style.setProperty(
+      "--beam-intensity",
+      String(intensityVal)
+    );
     if (beamCoreRef.current) {
-      beamCoreRef.current.style.boxShadow = `0 0 ${40 + intensityVal * 120}px rgba(155,107,255,${0.18 * intensityVal}), 0 0 ${
+      beamCoreRef.current.style.boxShadow = `0 0 ${
+        40 + intensityVal * 120
+      }px rgba(155,107,255,${0.18 * intensityVal}), 0 0 ${
         20 + intensityVal * 60
       }px rgba(107,220,255,${0.06 * intensityVal})`;
       beamCoreRef.current.style.filter = `blur(calc(var(--beam-blur, 10px)))`;
     }
-
-    // live status reflected in status text via state in JSX
 
     // glow pulse
     if (beamVisualRef.current) {
@@ -89,18 +107,15 @@ export default function SciFiDashboard() {
       holoRef.current.style.opacity = holoOn ? "0.12" : "0.02";
       holoRef.current.setAttribute("aria-hidden", String(!holoOn));
     }
-  };
-
-  // sync apply whenever relevant state changes
+  }, [bg, amount, opacity, intensity, glow, holoOn]);
   useEffect(() => {
     apply();
-    // reflect some terminal messages when adjustments are made
-    const msg = `> Light:${Math.round(amount)} Intensity:${Math.round((intensity / 200) * 100)}%`;
-    setTerminalLines((t) => {
-      const next = [...t, msg];
-      return next.slice(-80);
-    });
-  }, [bg, amount, opacity, intensity, glow, holoOn]);
+
+    const msg = `> Light:${Math.round(amount)} Intensity:${Math.round(
+      (intensity / 200) * 100
+    )}%`;
+    setTerminalLines((t) => [...t, msg].slice(-80));
+  }, [bg, amount, opacity, intensity, glow, holoOn, apply]);
 
   // demo: push new events every 9s when live (matches original)
   useEffect(() => {
@@ -109,7 +124,13 @@ export default function SciFiDashboard() {
       if (!live) return;
       const now = new Date();
       const t = now.toTimeString().slice(0, 8);
-      const msgs = ["Beam stabilized", "Micro-tweak applied", "Temp nominal", "Adaptive focus engaged", "Signal nominal"];
+      const msgs = [
+        "Beam stabilized",
+        "Micro-tweak applied",
+        "Temp nominal",
+        "Adaptive focus engaged",
+        "Signal nominal",
+      ];
       const colorPool = ["#6bdcff", "#b59bff", "#8cffb6", "#ffb86b", "#ff7b7b"];
       const color = colorPool[Math.floor(Math.random() * colorPool.length)];
       const text = msgs[Math.floor(Math.random() * msgs.length)];
@@ -119,7 +140,10 @@ export default function SciFiDashboard() {
         return next;
       });
       setTerminalLines((t) => {
-        const next = [...t, `[${t.length}] ${t.length ? "log" : "init"} - ${text}`];
+        const next = [
+          ...t,
+          `[${t.length}] ${t.length ? "log" : "init"} - ${text}`,
+        ];
         return next.slice(-80);
       });
     }, 9000);
@@ -178,13 +202,18 @@ export default function SciFiDashboard() {
     }
   }, [terminalLines, events]);
 
-  
-
   return (
     <div className={styles.wrapper} style={{ background: "var(--bg-custom)" }}>
       <div className={styles.stars} aria-hidden="true" />
-      <div className={styles.canvas} role="application" aria-label="Sci-Fi dashboard">
-        <div className={`${styles.panel} ${styles.left}`} aria-labelledby="controlsHeading">
+      <div
+        className={styles.canvas}
+        role="application"
+        aria-label="Sci-Fi dashboard"
+      >
+        <div
+          className={`${styles.panel} ${styles.left}`}
+          aria-labelledby="controlsHeading"
+        >
           <div className={styles.headerRow}>
             <div>
               <h1 id="controlsHeading" className={styles.title}>
@@ -211,7 +240,15 @@ export default function SciFiDashboard() {
                 aria-label="Background amount"
               />
             </div>
-            <input className={styles.numeric} id="bgNum" type="number" min="0" max="100" value={bg} onChange={(e) => setBg(Number(e.target.value))} />
+            <input
+              className={styles.numeric}
+              id="bgNum"
+              type="number"
+              min="0"
+              max="100"
+              value={bg}
+              onChange={(e) => setBg(Number(e.target.value))}
+            />
           </div>
 
           <div className={styles.control}>
@@ -230,7 +267,15 @@ export default function SciFiDashboard() {
                 aria-label="Amount"
               />
             </div>
-            <input className={styles.numeric} id="amountNum" type="number" min="0" max="200" value={amount} onChange={(e) => setAmount(Number(e.target.value))} />
+            <input
+              className={styles.numeric}
+              id="amountNum"
+              type="number"
+              min="0"
+              max="200"
+              value={amount}
+              onChange={(e) => setAmount(Number(e.target.value))}
+            />
           </div>
 
           <div className={styles.control}>
@@ -249,7 +294,15 @@ export default function SciFiDashboard() {
                 aria-label="Opacity"
               />
             </div>
-            <input className={styles.numeric} id="opacityNum" type="number" min="0" max="100" value={opacity} onChange={(e) => setOpacity(Number(e.target.value))} />
+            <input
+              className={styles.numeric}
+              id="opacityNum"
+              type="number"
+              min="0"
+              max="100"
+              value={opacity}
+              onChange={(e) => setOpacity(Number(e.target.value))}
+            />
           </div>
 
           <div className={styles.control}>
@@ -268,7 +321,15 @@ export default function SciFiDashboard() {
                 aria-label="Intensity"
               />
             </div>
-            <input className={styles.numeric} id="intensityNum" type="number" min="0" max="200" value={intensity} onChange={(e) => setIntensity(Number(e.target.value))} />
+            <input
+              className={styles.numeric}
+              id="intensityNum"
+              type="number"
+              min="0"
+              max="200"
+              value={intensity}
+              onChange={(e) => setIntensity(Number(e.target.value))}
+            />
           </div>
 
           <div className={styles.rowControls}>
@@ -280,7 +341,11 @@ export default function SciFiDashboard() {
                   tabIndex={0}
                   aria-checked={live}
                   onClick={() => setLive((s) => !s)}
-                  onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? setLive((s) => !s) : null)}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" || e.key === " "
+                      ? setLive((s) => !s)
+                      : null
+                  }
                   className={`${styles.toggle} ${live ? styles.on : ""}`}
                 >
                   <div className={styles.knob} />
@@ -294,7 +359,11 @@ export default function SciFiDashboard() {
                   tabIndex={0}
                   aria-checked={syncOn}
                   onClick={() => setSyncOn((s) => !s)}
-                  onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? setSyncOn((s) => !s) : null)}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" || e.key === " "
+                      ? setSyncOn((s) => !s)
+                      : null
+                  }
                   className={`${styles.toggle} ${syncOn ? styles.on : ""}`}
                 >
                   <div className={styles.knob} />
@@ -302,7 +371,14 @@ export default function SciFiDashboard() {
               </div>
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-end" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 8,
+                alignItems: "flex-end",
+              }}
+            >
               <div className={styles.control}>
                 <div className={styles.label}>Glow</div>
                 <div
@@ -310,7 +386,11 @@ export default function SciFiDashboard() {
                   tabIndex={0}
                   aria-checked={glow}
                   onClick={() => setGlow((s) => !s)}
-                  onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? setGlow((s) => !s) : null)}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" || e.key === " "
+                      ? setGlow((s) => !s)
+                      : null
+                  }
                   className={`${styles.checkbox} ${glow ? styles.checked : ""}`}
                 />
               </div>
@@ -321,72 +401,123 @@ export default function SciFiDashboard() {
                   tabIndex={0}
                   aria-checked={holoOn}
                   onClick={() => setHoloOn((s) => !s)}
-                  onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? setHoloOn((s) => !s) : null)}
-                  className={`${styles.checkbox} ${holoOn ? styles.checked : ""}`}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" || e.key === " "
+                      ? setHoloOn((s) => !s)
+                      : null
+                  }
+                  className={`${styles.checkbox} ${
+                    holoOn ? styles.checked : ""
+                  }`}
                 />
               </div>
             </div>
           </div>
 
           <div className={styles.controlsActions}>
-           
-            <button id="exportBtn" className={`${styles.btn} ${styles.primary}`} title="Reset to defaults"  onClick={handleReset}>
+            <button
+              id="exportBtn"
+              className={`${styles.btn} ${styles.primary}`}
+              title="Reset to defaults"
+              onClick={handleReset}
+            >
               Reset
             </button>
           </div>
-
-          
         </div>
 
-          <div className={`${styles.panel} ${styles.right}`} aria-labelledby="beamHeading">
-            <div style={{ display: "flex", gap: 18, alignItems: "center" }}>
-              <div style={{ flex: 1 }}>
-                <div className={styles.beamHeader}>
-                  <div>
-                    <div id="beamHeading" className={styles.beamTitle}>
-                      Beam
-                    </div>
-                    <div className={styles.muted}>Event log & live visualization</div>
+        <div
+          className={`${styles.panel} ${styles.right}`}
+          aria-labelledby="beamHeading"
+        >
+          <div style={{ display: "flex", gap: 18, alignItems: "center" }}>
+            <div style={{ flex: 1 }}>
+              <div className={styles.beamHeader}>
+                <div>
+                  <div id="beamHeading" className={styles.beamTitle}>
+                    Beam
                   </div>
                   <div className={styles.muted}>
-                    Status: <strong id="statusText">{live ? "Online" : "Standby"}</strong>
+                    Event log & live visualization
                   </div>
                 </div>
+                <div className={styles.muted}>
+                  Status:{" "}
+                  <strong id="statusText">{live ? "Online" : "Standby"}</strong>
+                </div>
+              </div>
 
-                <div className={styles.beamCard} style={{ marginTop: 12 }}>
-                  <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                    <div className={styles.brandBox}>B</div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 600 }}>Beam 01 — Focus Array</div>
-                      <div className={styles.muted}>Core intensity & diagnostics</div>
+              <div className={styles.beamCard} style={{ marginTop: 12 }}>
+                <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                  <div className={styles.brandBox}>B</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 600 }}>Beam 01 — Focus Array</div>
+                    <div className={styles.muted}>
+                      Core intensity & diagnostics
                     </div>
-                    <div className={styles.muted}>2.4s</div>
                   </div>
-
-                  <div className={styles.events} id="events" aria-live="polite" aria-atomic="false" style={{ marginTop: 12 }}>
-                    {events.map((e, i) => (
-                      <div className={styles.event} key={i} style={{ borderLeftColor: e.color }}>
-                        <div className={styles.dot} style={{ background: e.color }} />
-                        <div style={{ flex: 1 }}>
-                          <div className={styles.meta} dangerouslySetInnerHTML={{ __html: escapeHtml(e.text) }} />
-                          <div className={styles.time}>{e.t}</div>
-                        </div>
-                        <div className={styles.muted}>#{i + 1}</div>
-                      </div>
-                    ))}
-                  </div>
+                  <div className={styles.muted}>2.4s</div>
                 </div>
 
-                <div style={{ marginTop: 14 }} className={styles.preview} aria-hidden="false">
-                  <div className={styles.beamVisual} id="beamVisual" ref={beamVisualRef} aria-hidden="true">
-                    <div className={styles.beamCore} id="beamCore" ref={beamCoreRef} aria-hidden="true" />
-                  </div>
+                <div
+                  className={styles.events}
+                  id="events"
+                  aria-live="polite"
+                  aria-atomic="false"
+                  style={{ marginTop: 12 }}
+                >
+                  {events.map((e, i) => (
+                    <div
+                      className={styles.event}
+                      key={i}
+                      style={{ borderLeftColor: e.color }}
+                    >
+                      <div
+                        className={styles.dot}
+                        style={{ background: e.color }}
+                      />
+                      <div style={{ flex: 1 }}>
+                        <div
+                          className={styles.meta}
+                          dangerouslySetInnerHTML={{
+                            __html: escapeHtml(e.text),
+                          }}
+                        />
+                        <div className={styles.time}>{e.t}</div>
+                      </div>
+                      <div className={styles.muted}>#{i + 1}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div
+                style={{ marginTop: 14 }}
+                className={styles.preview}
+                aria-hidden="false"
+              >
+                <div
+                  className={styles.beamVisual}
+                  id="beamVisual"
+                  ref={beamVisualRef}
+                  aria-hidden="true"
+                >
+                  <div
+                    className={styles.beamCore}
+                    id="beamCore"
+                    ref={beamCoreRef}
+                    aria-hidden="true"
+                  />
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-        <div className={`${styles.panel} ${styles.bottom} ${styles.codingTerminal}`} aria-label="Terminal logs">
+        <div
+          className={`${styles.panel} ${styles.bottom} ${styles.codingTerminal}`}
+          aria-label="Terminal logs"
+        >
           <div className={styles.terminalHeader}>
             <div className={`${styles.dot} ${styles.red}`} />
             <div className={`${styles.dot} ${styles.yellow}`} />
@@ -394,7 +525,13 @@ export default function SciFiDashboard() {
             <span className={styles.termTitle}>beam_Logs.js</span>
           </div>
 
-          <div className={styles.terminalBody} id="terminalBody" role="log" aria-live="polite" ref={terminalRef}>
+          <div
+            className={styles.terminalBody}
+            id="terminalBody"
+            role="log"
+            aria-live="polite"
+            ref={terminalRef}
+          >
             <code className={styles.typed}>
               {terminalLines.map((line, idx) => (
                 <div key={idx} style={{ marginBottom: 4 }}>
@@ -405,7 +542,12 @@ export default function SciFiDashboard() {
           </div>
         </div>
 
-        <div className={styles.holo} id="holo" ref={holoRef} aria-hidden="true" />
+        <div
+          className={styles.holo}
+          id="holo"
+          ref={holoRef}
+          aria-hidden="true"
+        />
       </div>
     </div>
   );
