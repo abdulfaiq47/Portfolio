@@ -1,14 +1,14 @@
 "use client";
 import Image from "next/image";
-import LiquidLight from "@/components/Hover/page";
+import LiquidLight from "./components/Hover/page";
 import styles from "./page.module.css";
-import GradualBlur from "@/components/BottBlur/page";
-import SciFiDashboard from "@/components/Background/page";
-import Navbar from "@/components/Navbar/page";
-import Card from "@/components/Scrol/page";
-import Skills from "@/components/Skill/page";
-import { ContactF } from "@/components/Contact/page";
-import ScrollReveal from "@/components/ScrolRevel/page";
+import GradualBlur from "./components/BottBlur/page";
+import SciFiDashboard from "./components/Background/page";
+import Navbar from "./components/Navbar/page";
+import Card from "./components/Scrol/page";
+import Skills from "./components/Skill/page";
+import { ContactF } from "./components/Contact/page";
+import ScrollReveal from "./components/ScrolRevel/page";
 import { ReactTyped } from "react-typed";
 
 
