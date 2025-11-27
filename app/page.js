@@ -10,7 +10,7 @@ import Skills from "@/components/Skill/page";
 import { ContactF } from "@/components/Contact/page";
 import ScrollReveal from "@/components/ScrolRevel/page";
 import { ReactTyped } from "react-typed";
-import Projectss from "@/components/projects/page";
+
 
 export default function Home() {
   return (
@@ -75,7 +75,7 @@ export default function Home() {
       </section>
       <hr className={styles.liquidhr} />
       <section id="projects" className={styles.projects}>
-        <Projectss />
+        {/* <Projectss /> */}
       </section>
       <hr className={styles.liquidhr} />
       <section id="contact" className={styles.Contact}>
