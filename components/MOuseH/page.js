@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import "./LiquidLight.css";
 
-export default function LiquidLight() {
+export default function Mousehov() {
   const maskRef = useRef(null);
   const pos = useRef({ x: 50, y: 50 });
   const target = useRef({ x: 50, y: 50 });

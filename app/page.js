@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import GradualBlur from "@/components/BottBlur/page";
 // import SciFiDashboard from "@/components/Background/page";
 // import SciFiDashboard from "@/components/Background/page";
+import Mousehov from "@/components/MOuseH/page";
 import Dashboard from "@/components/Backgr/page";
 import Navbar from "@/components/Navbar/page";
 import Card from "@/components/Scrol/page";
@@ -61,7 +62,7 @@ export default function Home() {
         </div>
 
         <div className={styles.background}>
-          {/* <LiquidLight /> */}
+          <Mousehov />
           <Dashboard />
         </div>
       </section>
