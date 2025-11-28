@@ -60,8 +60,8 @@ export default function Home() {
         </div>
 
         <div className={styles.background}>
-          <LiquidLight />
-          <SciFiDashboard />
+          {/* <LiquidLight /> */}
+          {/* <SciFiDashboard /> */}
         </div>
       </section>
       <hr className={styles.liquidhr} />
