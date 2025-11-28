@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import GradualBlur from "@/components/BottBlur/page";
 // import SciFiDashboard from "@/components/Background/page";
 // import SciFiDashboard from "@/components/Background/page";
+import Dashboard from "@/components/Backgr/page";
 import Navbar from "@/components/Navbar/page";
 import Card from "@/components/Scrol/page";
 import Skills from "@/components/Skill/page";
@@ -61,7 +62,7 @@ export default function Home() {
 
         <div className={styles.background}>
           {/* <LiquidLight /> */}
-          {/* <SciFiDashboard /> */}
+          <Dashboard />
         </div>
       </section>
       <hr className={styles.liquidhr} />

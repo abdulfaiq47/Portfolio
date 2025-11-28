@@ -8,7 +8,7 @@ const clamp = (n, min, max) => {
   return Math.min(max, Math.max(min, n));
 };
 
-export default function SciFiDashboard() {
+export default function Dashboard() {
   // controls
   const [bg, setBg] = useState(8);
   const [amount, setAmount] = useState(60);
