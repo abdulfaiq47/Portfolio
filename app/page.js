@@ -15,11 +15,12 @@ import ScrollReveal from "@/components/ScrolRevel/page";
 // import { ReactTyped } from "react-typed";
 import Projectss from "@/components/Projets/page";
 import TypedComponent from "@/components/Typecom/page";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-      {/*0+*/}
+      {/*  */}
       <Navbar />
       <section id="main" className={styles.Main}>
         <div className={styles.HomeAB}>
@@ -35,24 +36,49 @@ export default function Home() {
                       I&apos;m <span className={styles.AbFaiq}>Abdul Faiq</span>
                     </h2>
                   </div>
-                    <div className="tes"></div>
-                    <div className="tes"></div>
-                    <div className="tes"></div>
-                    <div className="tes"></div>
-                    <TypedComponent />
-                 
+                  <div className="tes"></div>
+                  <div className="tes"></div>
+                  <div className="tes"></div>
+                  <div className="tes"></div>
+                  <TypedComponent />
                 </div>
-                {/* <ReactTyped
-                  strings={[
-                    "Web Developer",
-                    "Frontend Developer",
-                    "MERN Stack Developer",
-                  ]}
-                  typeSpeed={40}
-                  backSpeed={50}
-                  loop
-                /> */}
               </div>
+              <div className="gh"></div>
+              <div className={styles.links}>
+                <div className="gtthub">
+                  <Link
+                    href="https://github.com/abdulfaiq47"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      className={styles.github}
+                      src="./github.svg"
+                      width={24}
+                      height={24}
+                      alt="GitHub"
+                      priority
+                    />
+                  </Link>
+                </div>
+                <div className="linkdin">
+                  <Link
+                    href="www.linkedin.com/in/abdul-faiq47"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      className={styles.linkdin}
+                      src="./linkdin.svg"
+                      width={24}
+                      height={24}
+                      alt="Linkdin"
+                      priority
+                    />
+                  </Link>
+                </div>
+              </div>
+
               <div className={styles.FaiqImg}>
                 <Image
                   className={styles.ImgBack}

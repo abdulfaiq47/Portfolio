@@ -30,8 +30,37 @@
   height: 688px;
 }
 
+/* 1200px */
+@media (max-width: 1200px) {
+  .liquid-mask {
+    height: 692px;
+  }
+}
+
+/* 992px */
+@media (max-width: 992px) {
+  .liquid-mask {
+    height: 1171px;
+  }
+}
+
+/* 768px */
+@media (max-width: 768px) {
+  .liquid-mask {
+    height: 1400px;
+  }
+}
+
+/* 576px — mobile layout */
+@media (max-width: 576px) {
+  .liquid-mask {
+    height: 1350px;
+  }
+}
+
+/* 480px and smaller */
 @media (max-width: 480px) {
   .liquid-mask {
-    height: 150vh;
+    height: 1100vh; /* full viewport height */
   }
 }

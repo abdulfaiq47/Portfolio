@@ -100,6 +100,31 @@ body {
   /* object-fit: contain;  */
   /* border-radius: 248px; */
 }
+.links {
+  gap: 30px;
+  margin-top: 20px;
+  display: flex;
+  position: absolute;
+  top: 453px;
+  left: 123px;
+}
+.links img {
+  cursor: pointer;
+}
+.linkdin {
+  filter: none;
+  color: #0af;
+}
+.linkdin:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+  color: gold;
+  filter: grayscale(1) brightness(1.5);
+}
+.github:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
 
 /* ============================
    RESPONSIVE BREAKPOINTS ONLY
@@ -108,7 +133,7 @@ body {
 /* 1200px */
 @media (max-width: 1200px) {
   .IntroText {
-    width: 500px;
+    width: 520px;
     font-size: 2.8rem;
     left: 120px;
   }
@@ -116,20 +141,30 @@ body {
   .FaiqImg {
     left: 650px;
   }
+  .links {
+    top: 453px;
+    left: 67px;
+    gap: 25px;
+  }
 }
 
 /* 992px */
 @media (max-width: 992px) {
   .IntroText {
-    width: 400px;
+    width: 460px;
     font-size: 2.5rem;
-    left: 80px;
+    left: 105px;
     top: 120px;
   }
 
   .FaiqImg {
-    left: 500px;
+    left: 597px;
     top: 120px;
+  }
+  .links {
+    gap: 20px;
+    top: 373px;
+    left: 56px;
   }
 
   .ImgBack,
@@ -142,15 +177,20 @@ body {
 /* 768px */
 @media (max-width: 768px) {
   .IntroText {
-    width: 350px;
+    width: 450px;
     font-size: 2.2rem;
-    left: 50px;
+    left: 105px;
     top: 100px;
   }
 
   .FaiqImg {
-    left: 400px;
+    left: 475px;
     top: 100px;
+  }
+  .links {
+    top: 300px;
+    left: 50px;
+    gap: 15px;
   }
 
   .ImgBack,
@@ -177,16 +217,22 @@ body {
     left: 77%;
     transform: translateX(-50%);
   }
-
-  .ImgBack,
-  .FImg {
-    width: 251px;
-    height: 251px;
+  .links {
+    gap: 20px;
+    left: 50px;
+    top: 359px;
+    flex-direction: column;
   }
+}
 
-  .HomeAB {
-    left: 10px;
-  }
+.ImgBack,
+.FImg {
+  width: 251px;
+  height: 251px;
+}
+
+.HomeAB {
+  left: 10px;
 }
 
 /* 400px — small phones */
@@ -200,7 +246,15 @@ body {
 
   .FaiqImg {
     top: 284px;
-    left: 148px;
+    left: 155px;
+  }
+  .links {
+    gap: 15px;
+  }
+
+  .links img {
+    width: 30px;
+    height: 30px;
   }
 
   .ImgBack,
