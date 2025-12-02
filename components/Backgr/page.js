@@ -451,7 +451,7 @@ export default function Dashboard() {
                 <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
                   <div className={styles.brandBox}>B</div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 600 }}>Beam 01 — Focus Array</div>
+                    <div style={{ fontWeight: 500 }}>Beam 01 — Focus Array</div>
                     <div className={styles.muted}>
                       Core intensity & diagnostics
                     </div>

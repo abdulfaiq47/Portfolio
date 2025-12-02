@@ -12,25 +12,37 @@ import Card from "@/components/Scrol/page";
 import Skills from "@/components/Skill/page";
 import { ContactF } from "@/components/Contact/page";
 import ScrollReveal from "@/components/ScrolRevel/page";
-import { ReactTyped } from "react-typed";
+// import { ReactTyped } from "react-typed";
+import Projectss from "@/components/Projets/page";
+import TypedComponent from "@/components/Typecom/page";
 
 export default function Home() {
   return (
     <>
-      {/*  */}
+      {/*0+*/}
       <Navbar />
       <section id="main" className={styles.Main}>
         <div className={styles.HomeAB}>
           <ScrollReveal>
             <div className={styles.IntroMain}>
               <div className={styles.IntroText}>
-                <h2>
-                  Hi,
-                  <br />
-                  I&apos;m <span className={styles.AbFaiq}>Abdul Faiq</span>
-                </h2>
-
-                <ReactTyped
+                <div className="warepped">
+                  <div className="">
+                    {" "}
+                    <h2>
+                      Hi,
+                      <br />
+                      I&apos;m <span className={styles.AbFaiq}>Abdul Faiq</span>
+                    </h2>
+                  </div>
+                    <div className="tes"></div>
+                    <div className="tes"></div>
+                    <div className="tes"></div>
+                    <div className="tes"></div>
+                    <TypedComponent />
+                 
+                </div>
+                {/* <ReactTyped
                   strings={[
                     "Web Developer",
                     "Frontend Developer",
@@ -39,7 +51,7 @@ export default function Home() {
                   typeSpeed={40}
                   backSpeed={50}
                   loop
-                />
+                /> */}
               </div>
               <div className={styles.FaiqImg}>
                 <Image
@@ -48,6 +60,7 @@ export default function Home() {
                   width={100}
                   height={100}
                   alt="Faiq"
+                  priority
                 />
                 <Image
                   className={styles.FImg}
@@ -55,6 +68,7 @@ export default function Home() {
                   width={100}
                   height={100}
                   alt="Faiq"
+                  priority
                 />
               </div>
             </div>
@@ -76,7 +90,9 @@ export default function Home() {
       </section>
       <hr className={styles.liquidhr} />
       <section id="projects" className={styles.projects}>
-        {/* <Projectss /> */}
+        <ScrollReveal>
+          <Projectss />
+        </ScrollReveal>
       </section>
       <hr className={styles.liquidhr} />
       <section id="contact" className={styles.Contact}>
