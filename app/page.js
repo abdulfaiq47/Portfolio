@@ -127,12 +127,7 @@ export default function Home() {
         </ScrollReveal>
       </section>
       <div
-        style={{
-          position: "fixed",
-          bottom: "0px",
-          height: "73px",
-          width: "100%",
-        }}
+       className={styles.blurBottom}
       >
         <GradualBlur
           target="parent"
@@ -145,7 +140,7 @@ export default function Home() {
           opacity={1}
         />
       </div>
-      lorem
+      
     </>
   );
 }
