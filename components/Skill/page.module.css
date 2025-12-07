@@ -79,3 +79,78 @@
 .native {
   background: linear-gradient(90deg, #61dafb, #1e90ff);
 }
+
+
+
+/* ---------------------------- */
+/* RESPONSIVE FIXES ONLY        */
+/* ---------------------------- */
+
+/* Large tablets */
+@media (max-width: 992px) {
+  .skillsSection {
+    max-width: 90%;
+    margin: 70px auto;
+  }
+
+  .skillData {
+    padding: 10px 14px;
+  }
+
+  .skillName {
+    width: 35%;
+  }
+}
+
+/* Tablets & small screens */
+@media (max-width: 768px) {
+  .skillsSection {
+    max-width: 95%;
+    margin: 60px auto;
+    padding: 15px;
+  }
+
+  .subtitle {
+    font-size: 1.6rem;
+  }
+
+  .text {
+    font-size: 0.95rem;
+  }
+
+
+}
+
+/* Phones */
+@media (max-width: 576px) {
+  .subtitle {
+    font-size: 1.4rem;
+  }
+
+  .skillData {
+    padding: 10px;
+  }
+
+  .icon {
+    font-size: 1.3rem;
+  }
+
+  .percent {
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 400px) {
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
+  .text {
+    font-size: 0.85rem;
+  }
+
+  .skillData {
+    padding: 8px;
+  }
+}
