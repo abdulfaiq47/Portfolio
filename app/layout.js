@@ -1,32 +1,23 @@
-import { Geist, Geist_Mono, Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import LoaderMain from "@/components/loader/page";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const poppin = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
 
 export const metadata = {
   title: "Protfolio-Faiq",
   description: "This is my personal portfolio website showcasing my skills and projects.",
 };
 
+const poppin = Poppins({
+  variable: "--font-poppins",
+  display: "swap",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"], // don't use 9 weights unless necessary
+});
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${poppin.variable} ${geistMono.variable}`}>
+      <body className={poppin.variable}>
         <LoaderMain />
         {children}
       </body>
