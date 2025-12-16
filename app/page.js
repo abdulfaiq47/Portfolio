@@ -63,14 +63,14 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {/* <Image
+                    <Image
                       className={styles.github}
                       src="./github.svg"
                       width={24}
                       height={24}
                       alt="GitHub"
                       priority
-                    /> */}
+                    />
                   </Link>
                 </div>
                 <div className="linkdin">
@@ -100,14 +100,14 @@ export default function Home() {
                   alt="Faiq"
                   priority
                 />
-                <Image
+                {/* <Image
                   className={styles.FImg}
                   src="/Faiq.png"
                   width={100}
                   height={100}
                   alt="Faiq"
                   priority
-                />
+                /> */}
               </div>
             </div>
           </ScrollReveal>

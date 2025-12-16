@@ -225,7 +225,7 @@ body {
     margin: 0 auto;
     position: relative;
     top: 307px;
-    left: 77%;
+    left: 55%;
     transform: translateX(-50%);
   }
   .links {
@@ -259,7 +259,7 @@ body {
   }
   .FaiqImg {
     top: 284px;
-    left: 155px;
+    left: 38%;
   }
   .links {
     gap: 15px;
