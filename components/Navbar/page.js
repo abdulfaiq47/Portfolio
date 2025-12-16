@@ -28,7 +28,7 @@ const Navbar = () => {
       {/* Desktop Menu */}
       <div className={style.Ulcomp}>
         <ul>
-          {["main", "about", "skill", "projects", "contact"].map((item) => (
+          {["main","skill", "projects", "contact"].map((item) => (
             <li key={item} className={style.underlineAnimation}>
               <button onClick={() => handleClick(item)}>
                 {item.charAt(0).toUpperCase() + item.slice(1)}
@@ -49,7 +49,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {open && (
         <div className={style.mobileMenu}>
-          {["main", "about", "skill", "projects", "contact"].map((item) => (
+          {["main", "skill", "projects", "contact"].map((item) => (
             <button key={item} onClick={() => handleClick(item)}>
               {item}
             </button>

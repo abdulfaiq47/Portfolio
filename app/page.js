@@ -63,14 +63,14 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Image
+                    {/* <Image
                       className={styles.github}
                       src="./github.svg"
                       width={24}
                       height={24}
                       alt="GitHub"
                       priority
-                    />
+                    /> */}
                   </Link>
                 </div>
                 <div className="linkdin">
@@ -119,8 +119,7 @@ export default function Home() {
         </div>
       </section>
       <hr className={styles.liquidhr} />
-      <section id="about" className={styles.About}></section>
-      <hr className={styles.liquidhr} />
+   
       <section id="skill" className={styles.Skill}>
         <ScrollReveal>
           <Skills />
