@@ -19,7 +19,7 @@ export const metadata = {
   openGraph: {
     title: "Faiq – MERN Stack Web Developer",
     description:
-      "Portfolio of Faiq presenting about me and my projects in React and  Next.js",
+      "Portfolio of Faiq presenting my profile and projects built with React and Next.js",
     url: "https://portfolio-faiq.netlify.app",
     siteName: "Faiq Portfolio",
     images: [
