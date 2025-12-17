@@ -3,9 +3,9 @@ import "./globals.css";
 import LoaderMain from "@/components/loader/page";
 
 export const metadata = {
-  title: "Faiq – MERN Stack Web Developer | React, Next.js, Python",
+  title: "Faiq – MERN Stack Web Developer | React, Next.js",
   description:
-    "Faiq is a MERN Stack Web Developer specializing in React, Next.js, JavaScript, and Python. View projects, skills, and contact information.",
+    "Faiq is a MERN Stack Web Developer specializing in React, Next.js and  JavaScript. View projects, skills, and contact information.",
   keywords: [
     "Faiq",
     "Faiq developer",
@@ -19,7 +19,7 @@ export const metadata = {
   openGraph: {
     title: "Faiq – MERN Stack Web Developer",
     description:
-      "Portfolio of Faiq showcasing projects in React, Next.js, and Python.",
+      "Portfolio of Faiq presenting about me and my projects in React and  Next.js",
     url: "https://portfolio-faiq.netlify.app",
     siteName: "Faiq Portfolio",
     images: [
