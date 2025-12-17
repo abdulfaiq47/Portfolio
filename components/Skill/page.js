@@ -6,7 +6,7 @@ const Skills = () => {
     { icon: "bx bxl-html5", name: "HTML/CSS", percent: 75, barClass: styles.html },
     { icon: "bx bxl-javascript", name: "JavaScript", percent: 60, barClass: styles.js },
     { icon: "bx bxl-react", name: "React JS", percent: 52, barClass: styles.react },
-    { icon: "bx bxl-react", name: "React Native", percent: 40, barClass: styles.native },
+    { icon: "bx bxl-react", name: "Next js", percent: 40, barClass: styles.native },
   ];
 
   return (
