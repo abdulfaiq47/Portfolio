@@ -14,6 +14,7 @@ export const metadata = {
     "React Developer",
     "Next.js Portfolio",
     "JavaScript Developer",
+    "Portfolio Faiq"
   ],
   authors: [{ name: "Faiq" }],
   openGraph: {
